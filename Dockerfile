@@ -1,30 +1,43 @@
-FROM alpine:3.7
+FROM alpine:3.8
 MAINTAINER Eric Ball <eball@ccctechcenter.org>
+
+RUN rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* && \
+    mkdir /run/nginx
+
+RUN apk update
 
 RUN apk --update --no-cache add \
   nginx \
-  php5-fpm \
-  php5-pdo \
-  php5-json \
-  php5-openssl \
-  php5-pgsql \
-  php5-pdo_pgsql \
-  php5-mcrypt \
-  php5-sqlite3 \
-  php5-pdo_sqlite \
-  php5-ctype \
-  php5-zlib \
-  php5-xml \
-  php5-gd \
+  php7 \
+  php7-ctype \
+  php7-curl \
+  php7-dom \
+  php7-fileinfo \
+  php7-fpm \
+  php7-gd \
+  php7-iconv \
+  php7-json \
+  php7-mbstring \
+  php7-openssl \
+  php7-pdo \
+  php7-pdo_mysql \
+  php7-pdo_pgsql \
+  php7-pdo_sqlite \
+  php7-pgsql \
+  php7-session \
+  php7-simplexml \
+  php7-sqlite3 \
+  php7-tokenizer \
+  php7-xml \
+  php7-xmlwriter \
+  php7-zip \
+  php7-zlib \
   curl \
   py-pip \
-  php5-curl \
-  php5-zip \
-  php5-dom \
-  php5-iconv \
   supervisor
 
-RUN ln -s `which php5` /usr/bin/php
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 ADD     build_pdftk.sh /bin/
 ENV     VER_PDFTK=2.02
@@ -39,19 +52,16 @@ RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
 RUN pip install --upgrade pip && \
     pip install supervisor-stdout
 
-RUN mkdir -p /etc/nginx
-RUN mkdir -p /run/nginx
-RUN mkdir -p /var/run/php5-fpm
-RUN mkdir -p /var/log/supervisor
+RUN mkdir -p {/etc/nginx,/run/nginx,/var/run/php7-fpm,/var/log/supervisor}
 
-RUN rm /etc/nginx/nginx.conf
+RUN rm -f /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
-RUN rm /etc/php5/php-fpm.conf
-ADD php-fpm.conf /etc/php5/php-fpm.conf
+RUN rm -f /etc/php7/php-fpm.conf
+ADD php-fpm.conf /etc/php7/php-fpm.conf
 
-RUN rm -f /etc/php5/php.ini
-ADD php.ini /etc/php5/php.ini
+RUN rm -f /etc/php7/php.ini
+ADD php.ini /etc/php7/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
