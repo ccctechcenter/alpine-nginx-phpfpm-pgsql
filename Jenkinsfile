@@ -37,12 +37,14 @@ pipeline {
             }
         }
         stage('build') {
-            when { expression { env.service == "clair"} } //build phase only valid for certain services
+            when { expression { env.service == "alpine-nginx-phpfpm-pgsql"} } 
             steps {
                 script {
-                    dir ("${env.service}/docker") {
+                    dir ("${env.service}") {
                         sh "docker build . -t ccctechcenter/${env.service}:latest"
                         ceBuild.dockerPush("ccctechcenter/${env.service}", env.deploy_tag)
+                        ceBuild.imageScan(image: "ccctechcenter/${env.service}:${env.deploy_tag}", level: "High", channel: "#devops", ignore_failure: true) 
+
                     }
                 }
             }
