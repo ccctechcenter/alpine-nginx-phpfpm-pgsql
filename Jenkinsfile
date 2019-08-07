@@ -40,12 +40,9 @@ pipeline {
             when { expression { env.service == "alpine-nginx-phpfpm-pgsql"} } 
             steps {
                 script {
-                    dir ("${env.service}") {
-                        sh "docker build --file ./Dockerfile -t ccctechcenter/${env.service}:latest"
+                        sh "docker build . -t ccctechcenter/${env.service}:latest"
                         ceBuild.dockerPush("ccctechcenter/${env.service}", env.deploy_tag)
                         ceBuild.imageScan(image: "ccctechcenter/${env.service}:${env.deploy_tag}", level: "High", channel: "#devops", ignore_failure: true) 
-
-                    }
                 }
             }
         }
