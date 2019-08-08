@@ -7,7 +7,7 @@ pipeline {
         rollback_on_failure = "true"
         port = ""
         protocol = ""
-        environment = ""
+        environment = null
         channel = "#devops"
     }
     parameters {
@@ -32,6 +32,7 @@ pipeline {
 
                     echo "DEBUG: env.service: ${env.service}"
                     echo "DEBUG: env.deploy_tag: ${env.deploy_tag}"
+                    echo "DEBUG: env.environment: ${env.environment}"
 
                     
                 }
