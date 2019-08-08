@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     env.service = params.service == '' ? null : params.service
-                    env.deploy_tag = params.version == '' ? null : params.version
+                    env.deploy_tag = params.version == '' ? ceBuild.getDeployTag(env.service, env.BRANCH_NAME) : params.version 
 
                     echo "DEBUG: env.service: ${env.service}"
                     echo "DEBUG: env.deploy_tag: ${env.deploy_tag}"
@@ -46,7 +46,7 @@ pipeline {
                         
                         ceBuild.dockerPush("ccctechcenter/${env.service}", env.deploy_tag)
 
-                        //ceBuild.imageScan(image: "ccctechcenter/${env.service}:${env.deploy_tag}", level: "High", channel: "#devops", ignore_failure: true) 
+                        ceBuild.imageScan(image: "ccctechcenter/${env.service}:${env.deploy_tag}", level: "High", channel: "#devops", ignore_failure: true) 
 
                 }
             }
