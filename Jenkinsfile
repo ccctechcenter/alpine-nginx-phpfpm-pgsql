@@ -13,11 +13,11 @@ pipeline {
     parameters {
         choice(
             choices: 'alpine-nginx-phpfpm-pgsql',
-            description: 'set the target service for deployment',
+            description: 'alpine-nginx-phpfpm-pgsql service for Build',
             name: 'service')
         string(
             defaultValue: "",
-            description: 'Image tag or version number need to provide for build and push to docker registry',
+            description: 'Image version override from latest to custome version (optional - will tag with provided version and publish to docker registry, version tag format (X.Y.Z)',
             name: 'version')
     }
     options {
