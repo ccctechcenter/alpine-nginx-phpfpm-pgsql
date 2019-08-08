@@ -7,6 +7,7 @@ pipeline {
         rollback_on_failure = "true"
         port = ""
         protocol = ""
+        environment = ""
         channel = "#devops"
     }
     parameters {
@@ -41,7 +42,7 @@ pipeline {
             steps {
                 script {
                         sh "docker build . -t ccctechcenter/${env.service}:latest"
-
+                        
                         ceBuild.dockerPush("ccctechcenter/${env.service}", env.deploy_tag)
                         ceBuild.imageScan(image: "ccctechcenter/${env.service}:${env.deploy_tag}", level: "High", channel: "#devops", ignore_failure: true) 
                 }
@@ -51,12 +52,12 @@ pipeline {
     post {
         failure {
             script {
-                ceDeploy.slackNotify(env.channel, "danger", "Failure", env.service, , env.url, env.deploy_tag)
+                ceDeploy.slackNotify(env.channel, "danger", "Failure", env.service, env.environment, env.url, env.deploy_tag)
             }
         }
         success {
             script {
-                ceDeploy.slackNotify(env.channel, "good", "Success", env.service, , env.url, env.deploy_tag)
+                ceDeploy.slackNotify(env.channel, "good", "Success", env.service, env.environment, env.url, env.deploy_tag)
             }
         }
     }
