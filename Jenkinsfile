@@ -7,7 +7,7 @@ pipeline {
         rollback_on_failure = "true"
         port = ""
         protocol = ""
-        environment = alpine
+        environment = "alpine"
         channel = "#devops"
     }
     parameters {
