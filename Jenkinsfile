@@ -45,7 +45,9 @@ pipeline {
                         sh "docker build . -t ccctechcenter/${env.service}:latest"
                         
                         ceBuild.dockerPush("ccctechcenter/${env.service}", env.deploy_tag)
+
                         ceBuild.imageScan(image: "ccctechcenter/${env.service}:${env.deploy_tag}", level: "High", channel: "#devops", ignore_failure: true) 
+
                 }
             }
         }
