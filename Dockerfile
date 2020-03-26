@@ -13,6 +13,7 @@ RUN apk --update --no-cache add \
   php7-ctype \
   php7-curl \
   php7-dom \
+  php7-intl \
   php7-fileinfo \
   php7-fpm \
   php7-gd \
@@ -46,8 +47,7 @@ RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
   /bin/build_pdftk.sh && \
   apk del build-base unzip wget make fastjar && \
   rm -rf /var/cache/apk/* && \
-  pdftk php-ext-configure intl && \
-  php-ext-install
+  pdftk
 
 # Configure supervisor
 RUN pip install --upgrade pip && \
