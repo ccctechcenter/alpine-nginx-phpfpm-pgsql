@@ -6,6 +6,7 @@ RUN rm -rf /var/cache/apk/* && \
     mkdir /run/nginx
 
 RUN apk update
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
 RUN apk --update --no-cache add \
   nginx \
@@ -38,8 +39,6 @@ RUN apk --update --no-cache add \
   supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
-
-RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
 ADD     build_pdftk.sh /bin/
 ENV     VER_PDFTK=2.02
