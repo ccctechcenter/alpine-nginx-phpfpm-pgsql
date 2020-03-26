@@ -46,7 +46,8 @@ RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
   /bin/build_pdftk.sh && \
   apk del build-base unzip wget make fastjar && \
   rm -rf /var/cache/apk/* && \
-  pdftk docker-php-ext-install
+  pdftk docker-php-ext-configure intl && \
+  docker-php-ext-install
 
 # Configure supervisor
 RUN pip install --upgrade pip && \
