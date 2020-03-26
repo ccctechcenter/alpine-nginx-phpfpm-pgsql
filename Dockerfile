@@ -6,7 +6,6 @@ RUN rm -rf /var/cache/apk/* && \
     mkdir /run/nginx
 
 RUN apk update
-RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
 RUN apk --update --no-cache add \
   nginx \
@@ -47,7 +46,7 @@ RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
   /bin/build_pdftk.sh && \
   apk del build-base unzip wget make fastjar && \
   rm -rf /var/cache/apk/* && \
-  pdftk
+  pdftk docker-php-ext-install
 
 # Configure supervisor
 RUN pip install --upgrade pip && \
