@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.12
 MAINTAINER Eric Ball <eball@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
