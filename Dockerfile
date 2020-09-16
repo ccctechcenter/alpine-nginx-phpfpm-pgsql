@@ -62,4 +62,4 @@ ENV TIMEZONE America/Los_Angeles
 
 EXPOSE 80 9000
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor.d/ngnix-supervisor.ini"]
