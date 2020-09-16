@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.9
 MAINTAINER Eric Ball <eball@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
@@ -42,6 +42,12 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
 
 ADD     build_pdftk.sh /bin/
 ENV     VER_PDFTK=2.02
+
+RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
+  /bin/build_pdftk.sh && \
+  apk del build-base unzip wget make fastjar && \
+  rm -rf /var/cache/apk/* && \
+  pdftk
 
 # Configure supervisor
 RUN pip install --upgrade pip && \
