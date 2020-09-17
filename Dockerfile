@@ -41,7 +41,7 @@ RUN apk --update --no-cache add \
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 # Configure supervisor
-RUN pip install --upgrade pip3 && \
+RUN pip install --upgrade pip && \
     pip install supervisor-stdout
 
 RUN mkdir -p {/etc/nginx,/run/nginx,/var/run/php7-fpm,/var/log/supervisor}
