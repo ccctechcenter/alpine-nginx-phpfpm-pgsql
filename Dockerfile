@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM php/7.4/alpine:3.12
 MAINTAINER Eric Ball <eball@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
@@ -35,22 +35,13 @@ RUN apk --update --no-cache add \
   php7-zip \
   php7-zlib \
   curl \
-  py-pip \
+  py3-pip \
   supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
-ADD     build_pdftk.sh /bin/
-ENV     VER_PDFTK=2.02
-
-RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
-  /bin/build_pdftk.sh && \
-  apk del build-base unzip wget make fastjar && \
-  rm -rf /var/cache/apk/* && \
-  pdftk
-
 # Configure supervisor
-RUN pip install --upgrade pip && \
+RUN pip install --upgrade pip3 && \
     pip install supervisor-stdout
 
 RUN mkdir -p {/etc/nginx,/run/nginx,/var/run/php7-fpm,/var/log/supervisor}
