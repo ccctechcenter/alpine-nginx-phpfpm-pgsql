@@ -1,4 +1,4 @@
-FROM php/7.4/alpine:3.12
+FROM alpine:3.12
 MAINTAINER Eric Ball <eball@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
