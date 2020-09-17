@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.11
 MAINTAINER Eric Ball <eball@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
@@ -35,7 +35,7 @@ RUN apk --update --no-cache add \
   php7-zip \
   php7-zlib \
   curl \
-  py2-pip \
+  py-pip \
   supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
