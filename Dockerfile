@@ -35,7 +35,7 @@ RUN apk --update --no-cache add \
   php7-zip \
   php7-zlib \
   curl \
-  py3-pip \
+  py2-pip \
   supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
