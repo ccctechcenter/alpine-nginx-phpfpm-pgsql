@@ -1,5 +1,5 @@
 FROM alpine:3.11
-MAINTAINER Eric Ball <eball@ccctechcenter.org>
+MAINTAINER Emmett Culley <eculley@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -35,13 +35,13 @@ RUN apk --update --no-cache add \
   php7-zip \
   php7-zlib \
   curl \
-  py-pip \
-  supervisor
+  py-pip
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 # Configure supervisor
 RUN pip install --upgrade pip && \
+    pip install supervisor \
     pip install supervisor-stdout
 
 RUN mkdir -p {/etc/nginx,/run/nginx,/var/run/php7-fpm,/var/log/supervisor}
@@ -57,9 +57,9 @@ ADD php.ini /etc/php7/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
-ADD nginx-supervisor.ini /etc/supervisor.d/nginx-supervisor.ini
+ADD supervisord.conf /etc/supervisord.conf
 ENV TIMEZONE America/Los_Angeles
 
 EXPOSE 80 9000
 
-CMD ["/usr/bin/supervisord", "-c", '/etc/supervisor.d/nginx-supervisor.ini']
+CMD /usr/bin/supervisord
