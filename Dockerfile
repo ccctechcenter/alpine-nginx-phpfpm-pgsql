@@ -1,5 +1,5 @@
-FROM alpine:3.8
-MAINTAINER Eric Ball <eball@ccctechcenter.org>
+FROM alpine:3.11
+MAINTAINER Emmett Culley <eculley@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -22,6 +22,7 @@ RUN apk --update --no-cache add \
   php7-mbstring \
   php7-openssl \
   php7-pdo \
+  php7-phar \
   php7-pdo_mysql \
   php7-pdo_pgsql \
   php7-pdo_sqlite \
@@ -31,26 +32,18 @@ RUN apk --update --no-cache add \
   php7-sqlite3 \
   php7-tokenizer \
   php7-xml \
+  php7-xmlreader \
   php7-xmlwriter \
   php7-zip \
   php7-zlib \
   curl \
-  py-pip \
-  supervisor
+  py-pip
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
-ADD     build_pdftk.sh /bin/
-ENV     VER_PDFTK=2.02
-
-RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
-  /bin/build_pdftk.sh && \
-  apk del build-base unzip wget make fastjar && \
-  rm -rf /var/cache/apk/* && \
-  pdftk
-
 # Configure supervisor
 RUN pip install --upgrade pip && \
+    pip install supervisor \
     pip install supervisor-stdout
 
 RUN mkdir -p {/etc/nginx,/run/nginx,/var/run/php7-fpm,/var/log/supervisor}
@@ -66,9 +59,9 @@ ADD php.ini /etc/php7/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
-ADD nginx-supervisor.ini /etc/supervisor.d/nginx-supervisor.ini
+ADD supervisord.conf /etc/supervisord.conf
 ENV TIMEZONE America/Los_Angeles
 
 EXPOSE 80 9000
 
-CMD ["/usr/bin/supervisord"]
+CMD /usr/bin/supervisord

@@ -21,6 +21,7 @@ pipeline {
             name: 'version')
     }
     options {
+        timestamps()
         buildDiscarder(logRotator(artifactDaysToKeepStr: '60', artifactNumToKeepStr: '10', daysToKeepStr: '60', numToKeepStr: '10'))
     }
     stages {
