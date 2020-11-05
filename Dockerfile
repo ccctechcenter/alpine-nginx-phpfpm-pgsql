@@ -62,6 +62,12 @@ VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 ADD supervisord.conf /etc/supervisord.conf
 ENV TIMEZONE America/Los_Angeles
 
+# Add crontab file in the cron directory
+ADD crontab /etc/crontabs/root
+
+# start crond container startup
+CMD crond -l 2 -b
+
 EXPOSE 80 9000
 
 CMD /usr/bin/supervisord
