@@ -41,6 +41,15 @@ RUN apk --update --no-cache add \
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
+ADD     build_pdftk.sh /bin/
+ENV     VER_PDFTK=2.02
+
+RUN apk --no-cache add --update unzip wget make fastjar gcc gcc-java g++ && \
+  /bin/build_pdftk.sh && \
+  apk del build-base unzip wget make fastjar && \
+  rm -rf /var/cache/apk/* && \
+  pdftk
+
 # Configure supervisor
 RUN pip install --upgrade pip && \
     pip install supervisor \
