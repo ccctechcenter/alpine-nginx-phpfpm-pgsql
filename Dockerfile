@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.16
 MAINTAINER Emmett Culley <eculley@ccctechcenter.org>
 
 RUN rm -rf /var/cache/apk/* && \
@@ -8,8 +8,8 @@ RUN rm -rf /var/cache/apk/* && \
 RUN apk update
 
 # Installing bash
-RUN apk add bash
-RUN sed -i 's/bin\/ash/bin\/bash/g' /etc/passwd
+#RUN apk add bash
+#RUN sed -i 's/bin\/ash/bin\/bash/g' /etc/passwd
 
 RUN apk --update --no-cache add \
   nginx \
@@ -42,36 +42,39 @@ RUN apk --update --no-cache add \
   php8-zlib \
   php8-pecl-redis \
   curl \
-  py-pip
+  py-pip \
+  supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 # Configure supervisor
-RUN pip install --upgrade pip && \
-    pip install supervisor && \
-    pip install supervisor-stdout
+RUN pip install supervisor-stdout
 
-RUN mkdir -p {/etc/nginx,/run/nginx,/var/run/php8-fpm,/var/log/supervisor}
+RUN mkdir -p /etc/nginx
+RUN mkdir -p /run/nginx
+RUN mkdir -p /run/php8
+RUN mkdir -p /var/log/supervisor
 
 RUN rm -f /etc/nginx/nginx.conf
-ADD nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN rm -f /etc/php8/php-fpm.conf
-ADD php-fpm.conf /etc/php8/php-fpm.conf
+RUN rm -f /etc/php8/php-fpm.d/www.conf
+COPY php-fpm.conf /etc/php8/php-fpm.d/www.conf
 
 RUN rm -f /etc/php8/php.ini
-ADD php.ini /etc/php8/php.ini
-
-RUN ln -s /usr/bin/php8 /usr/bin/php
+COPY php.ini /etc/php8/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
-ADD supervisor_stdout.py /usr/lib/python3.9/site-packages/supervisor_stdout.py
-ADD supervisord.conf /etc/supervisord.conf
+RUN rm -f /etc/nginx/sites-enabled/default
+COPY sites /etc/nginx/sites-enabled/default
+
+COPY supervisor_stdout.py /usr/lib/python3.10/site-packages/supervisor_stdout.py
+COPY supervisord.conf /etc/supervisord.conf
 ENV TIMEZONE America/Los_Angeles
 
 # Add crontab file in the cron directory
-ADD crontab /etc/crontabs/root
+COPY crontab /etc/crontabs/root
 
 EXPOSE 80 9000
 
