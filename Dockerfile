@@ -66,8 +66,9 @@ COPY php.ini /etc/php8/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
-RUN rm -f /etc/nginx/sites-enabled/default
-COPY sites /etc/nginx/sites-enabled/default
+# Uncomment the below to run the container stand alone
+#RUN rm -f /etc/nginx/sites-enabled/default
+#COPY sites /etc/nginx/sites-enabled/default
 
 COPY supervisor_stdout.py /usr/lib/python3.10/site-packages/supervisor_stdout.py
 COPY supervisord.conf /etc/supervisord.conf

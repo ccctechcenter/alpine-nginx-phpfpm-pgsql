@@ -1,3 +1,4 @@
+#This is to be used only when debugging this container stand alone
 server {
   listen 80;
   server_name default;
