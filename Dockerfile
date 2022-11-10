@@ -1,5 +1,5 @@
 FROM alpine:3.16
-MAINTAINER Emmett Culley <eculley@ccctechcenter.org>
+LABEL maintainer="Veronica Finley <vfinley@ccctechcenter.org>"
 
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
