@@ -43,12 +43,15 @@ RUN apk --update --no-cache add \
   php8-pecl-redis \
   curl \
   py-pip \
+  nodejs \
+  npm\
   supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 # Configure supervisor
 RUN pip install supervisor-stdout
+RUN npm install -g npm@latest
 
 RUN mkdir -p /etc/nginx
 RUN mkdir -p /run/nginx
