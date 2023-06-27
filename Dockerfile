@@ -1,5 +1,5 @@
-FROM alpine:3.16
-LABEL maintainer="Veronica Finley <vfinley@ccctechcenter.org>"
+FROM alpine:3.18
+LABEL maintainer="Emmett Culley <eculley@ccctechcenter.org>"
 
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -13,34 +13,34 @@ RUN apk update
 
 RUN apk --update --no-cache add \
   nginx \
-  php8 \
-  php8-ctype \
-  php8-curl \
-  php8-dom \
-  php8-intl \
-  php8-fileinfo \
-  php8-fpm \
-  php8-gd \
-  php8-iconv \
-  php8-json \
-  php8-mbstring \
-  php8-openssl \
-  php8-pdo \
-  php8-phar \
-  php8-pdo_mysql \
-  php8-pdo_pgsql \
-  php8-pdo_sqlite \
-  php8-pgsql \
-  php8-session \
-  php8-simplexml \
-  php8-sqlite3 \
-  php8-tokenizer \
-  php8-xml \
-  php8-xmlreader \
-  php8-xmlwriter \
-  php8-zip \
-  php8-zlib \
-  php8-pecl-redis \
+  php82 \
+  php82-ctype \
+  php82-curl \
+  php82-dom \
+  php82-intl \
+  php82-fileinfo \
+  php82-fpm \
+  php82-gd \
+  php82-iconv \
+  php82-json \
+  php82-mbstring \
+  php82-openssl \
+  php82-pdo \
+  php82-phar \
+  php82-pdo_mysql \
+  php82-pdo_pgsql \
+  php82-pdo_sqlite \
+  php82-pgsql \
+  php82-session \
+  php82-simplexml \
+  php82-sqlite3 \
+  php82-tokenizer \
+  php82-xml \
+  php82-xmlreader \
+  php82-xmlwriter \
+  php82-zip \
+  php82-zlib \
+  php82-pecl-redis \
   curl \
   py-pip \
   nodejs \
@@ -55,17 +55,17 @@ RUN npm install -g npm@latest
 
 RUN mkdir -p /etc/nginx
 RUN mkdir -p /run/nginx
-RUN mkdir -p /run/php8
+RUN mkdir -p /run/php82
 RUN mkdir -p /var/log/supervisor
 
 RUN rm -f /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN rm -f /etc/php8/php-fpm.d/www.conf
-COPY php-fpm.conf /etc/php8/php-fpm.d/www.conf
+RUN rm -f /etc/php82/php-fpm.d/www.conf
+COPY php-fpm.conf /etc/php82/php-fpm.d/www.conf
 
-RUN rm -f /etc/php8/php.ini
-COPY php.ini /etc/php8/php.ini
+RUN rm -f /etc/php82/php.ini
+COPY php.ini /etc/php82/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
