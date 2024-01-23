@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.19
 LABEL maintainer="Emmett Culley <eculley@ccctechcenter.org>"
 
 RUN rm -rf /var/cache/apk/* && \
@@ -13,59 +13,62 @@ RUN apk update
 
 RUN apk --update --no-cache add \
   nginx \
-  php81 \
-  php81-ctype \
-  php81-curl \
-  php81-dom \
-  php81-intl \
-  php81-fileinfo \
-  php81-fpm \
-  php81-gd \
-  php81-iconv \
-  php81-json \
-  php81-mbstring \
-  php81-openssl \
-  php81-pdo \
-  php81-phar \
-  php81-pdo_mysql \
-  php81-pdo_pgsql \
-  php81-pdo_sqlite \
-  php81-pgsql \
-  php81-session \
-  php81-simplexml \
-  php81-sqlite3 \
-  php81-tokenizer \
-  php81-xml \
-  php81-xmlreader \
-  php81-xmlwriter \
-  php81-zip \
-  php81-zlib \
-  php81-pecl-redis \
+  php82 \
+  php82-ctype \
+  php82-curl \
+  php82-dom \
+  php82-intl \
+  php82-fileinfo \
+  php82-fpm \
+  php82-gd \
+  php82-iconv \
+  php82-json \
+  php82-mbstring \
+  php82-openssl \
+  php82-pdo \
+  php82-phar \
+  php82-pdo_mysql \
+  php82-pdo_pgsql \
+  php82-pdo_sqlite \
+  php82-pgsql \
+  php82-session \
+  php82-simplexml \
+  php82-sqlite3 \
+  php82-tokenizer \
+  php82-xml \
+  php82-xmlreader \
+  php82-xmlwriter \
+  php82-zip \
+  php82-zlib \
+  php82-pecl-redis \
   curl \
-  py-pip \
+  pipx\
   nodejs \
-  npm\
+  npm \
   supervisor
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community gnu-libiconv
 
 # Configure supervisor
-RUN pip install supervisor-stdout
+RUN pipx install supervisor-stdout
 RUN npm install -g npm@latest
 
 RUN mkdir -p /etc/nginx
 RUN mkdir -p /run/nginx
-RUN mkdir -p /run/php81
+RUN mkdir -p /run/php82
 RUN mkdir -p /var/log/supervisor
 
 RUN rm -f /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN rm -f /etc/php81/php-fpm.d/www.conf
-COPY php-fpm.conf /etc/php81/php-fpm.d/www.conf
+RUN rm -f /etc/php82/php-fpm.d/www.conf
+COPY php-fpm.conf /etc/php82/php-fpm.d/www.conf
 
-RUN rm -f /etc/php81/php.ini
-COPY php.ini /etc/php81/php.ini
+#RUN rm -f /usr/bin/php
+#RUN ln -s /usr/bin/php82 /usr/bin/php
+
+RUN rm -f /etc/php82/php.ini
+COPY php.ini /etc/php82/php.ini
 
 VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
