@@ -78,7 +78,7 @@ VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
 #RUN cat /usr/lib/python3.11/site-packages/supervisor_stdout.py
 
-COPY supervisor_stdout.py /usr/lib/python3.11/site-packages/supervisor_stdout.py
+#COPY supervisor_stdout.py /usr/lib/python3.11/site-packages/supervisor_stdout.py
 COPY supervisord.conf /etc/supervisord.conf
 ENV TIMEZONE America/Los_Angeles
 
