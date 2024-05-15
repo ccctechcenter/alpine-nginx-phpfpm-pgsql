@@ -1,4 +1,5 @@
-#This is to be used only when debugging this container stand alone
+# This is to be used only when debugging this container stand alone
+# This file will be replaced by individual app's Dockerfile on build.
 server {
   listen 80;
   server_name default;
