@@ -17,7 +17,7 @@ pipeline {
             name: 'service')
         string(
             defaultValue: "",
-            description: 'Image version override from latest to custome version (optional - will tag with provided version and publish to docker registry, version tag format (X.Y.Z)',
+            description: 'Image version override from latest to custom version (optional - will tag with provided version and publish to docker registry, version tag format (X.Y.Z)',
             name: 'version')
     }
     options {
