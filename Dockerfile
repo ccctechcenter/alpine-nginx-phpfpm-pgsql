@@ -1,14 +1,15 @@
+FROM alpine:3.19
 # Notes:
 # 20240515: No need to install pip and supervisor-stdout. Supervisor-stdout is a python app that has not been updated
 # for 3 years. Supervisord can output to stdout with stdout_logfile in supervisord.conf.
 
-FROM alpine:3.19
 # Change the maintainer to your info if you update this version of the image.
 LABEL maintainer="UT Fong <ufong@ccctechcenter.org>"
 
 # Clean up
 RUN rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    mkdir /run/nginx
 
 # Update APK
 RUN apk update
