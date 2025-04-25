@@ -8,8 +8,7 @@ LABEL maintainer="UT Fong <ufong@ccctechcenter.org>"
 
 # Clean up
 RUN rm -rf /var/cache/apk/* && \
-    rm -rf /tmp/* && \
-    mkdir /run/nginx
+    rm -rf /tmp/*
 
 # Update APK
 RUN apk update
