@@ -1,3 +1,7 @@
+/*
+Notes:
+20240515: Not used anymore. Build process is done in GitHub/Docker.
+
 #!groovy
 @Library('jenkinsLib') _
 currentBuild.displayName = "#${env.BUILD_NUMBER}-${branch_name}"
@@ -66,4 +70,4 @@ pipeline {
         }
     }
 }
-
+*/
