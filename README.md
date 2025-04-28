@@ -42,7 +42,7 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
 3. Build the image. This will take a few minutes. 
    ```    
-   docker build .
+   docker build --no-cache .
    ```
 ### Test the Image
 
@@ -56,7 +56,7 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
    docker container run -d IMAGE_ID
    ```
 
-3. Once everything has started up, you should be able to access the container's terminal via Docker Desktop. Open a terminal, and get the PHP version. This should be successful.
+3. Once everything has started up, you should be able to access the container's terminal via Docker Desktop. Open a terminal and retrieve the PHP version from the container. This should be successful.
    ```
    > php -v
    ```
@@ -104,13 +104,13 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 ## Versioning
 
 For the versions available, see the
-[tags on this repository](https://github.com/your/repository/tags).
+[tags on this repository](https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql/tags).
 
 ## Authors
 
 * **UT Fong** - *Maintenance: Created this doc, not the repo* - [ufongccctc](https://github.com/ufongccctc)
 
-See also the list of [contributors](https://github.com/your/repository/contributors) who
+See also the list of [contributors](https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql/contributors) who
 participated in this project.
 
 ## License

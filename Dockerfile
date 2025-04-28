@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.21
 # Notes:
 # 20240515: No need to install pip and supervisor-stdout. Supervisor-stdout is a python app that has not been updated
 # for 3 years. Supervisord can output to stdout with stdout_logfile in supervisord.conf.
@@ -73,9 +73,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/php82/php-fpm.d/www.conf
 COPY php-fpm.conf /etc/php82/php-fpm.d/www.conf
 
-# (What is this?)
-#RUN rm -f /usr/bin/php
-#RUN ln -s /usr/bin/php82 /usr/bin/php
+# Create the symlink for the php command
+RUN rm -f /usr/bin/php
+RUN ln -s /usr/bin/php82 /usr/bin/php
 
 # Add php.ini (will be overwritten by individual app's build process)
 RUN rm -f /etc/php82/php.ini
@@ -90,7 +90,7 @@ VOLUME ["/var/www", "/etc/nginx/sites-enabled"]
 
 # Add supervisord.conf
 COPY supervisord.conf /etc/supervisord.conf
-ENV TIMEZONE America/Los_Angeles
+ENV TIMEZONE=America/Los_Angeles
 
 # Add crontab file in the cron directory
 COPY crontab /etc/crontabs/root
