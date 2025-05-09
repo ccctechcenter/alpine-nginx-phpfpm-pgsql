@@ -1,3 +1,7 @@
+/*
+Notes:
+20240515: Not used anymore. Build process is done in GitHub/Docker.
+
 #!groovy
 @Library('jenkinsLib') _
 currentBuild.displayName = "#${env.BUILD_NUMBER}-${branch_name}"
@@ -17,7 +21,7 @@ pipeline {
             name: 'service')
         string(
             defaultValue: "",
-            description: 'Image version override from latest to custome version (optional - will tag with provided version and publish to docker registry, version tag format (X.Y.Z)',
+            description: 'Image version override from latest to custom version (optional - will tag with provided version and publish to docker registry, version tag format (X.Y.Z)',
             name: 'version')
     }
     options {
@@ -66,4 +70,4 @@ pipeline {
         }
     }
 }
-
+*/

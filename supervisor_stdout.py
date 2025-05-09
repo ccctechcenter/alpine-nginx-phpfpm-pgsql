@@ -1,3 +1,7 @@
+"""
+Notes:
+20240515: Not used anymore. See Dockerfile.
+
 from __future__ import print_function
 import sys
 
@@ -27,3 +31,4 @@ def event_handler(event, response):
 
 if __name__ == '__main__':
     main()
+"""
