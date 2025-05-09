@@ -189,13 +189,14 @@ The following add-ins require no customization:
 ## Versioning
 
 For the versions available, see the
-[tags on this repository](https://github.com/your/repository/tags).
+[tags on this repository](https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql/tags).
 
 ## Authors
 
 * **UT Fong** - *Maintenance: Created this doc, not the repo* - [ufongccctc](https://github.com/ufongccctc)
 * **Ken Van Mersbergen** *Maintenance: Upgraded this image to Alpine 3.21 and PHP 8.3
-See also the list of [contributors](https://github.com/your/repository/contributors) who
+
+See also the list of [contributors](https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql/contributors) who
 participated in this project.
 
 ## License
