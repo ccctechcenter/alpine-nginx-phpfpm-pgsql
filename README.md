@@ -68,13 +68,13 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
 ### Tag and Push
 
-1. Git add, commit, and tag. For example, we are releasing version 1.0.21.
+u1. Git add, commit, and tag. For example, we are releasing version 1.0.22.
    ```
    git status
    git add -u
    git commit -m "SCM-3324 & SCM-3236 Upgrade to Alpine 3.21 and PHP 8.3"
-   git tag -a 1.0.21 -m "release 1.0.21"
-   git push origin release/1.0.21 && git push origin 1.0.21
+   git tag -a 1.0.22 -m "release 1.0.22"
+   git push origin release/1.0.22 && git push origin 1.0.22
    ```
    
 2. Docker tag image with IMAGE_ID found earlier.
