@@ -102,16 +102,19 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
    git push origin release/1.0.22 && git push origin 1.0.22
    ```
    
-2. Docker tag image with IMAGE_ID found earlier.
-3. 
-4. ## NEED TO UPDATE TO PUSH TO DOCKER HUB
-5. 
+2. In the past, the image would be pushed to our docker registry. That has now changed and we push to Docker Hub.
+   Also, we are building and pushing two images to support developers that are running Intel and Mac (note the new Mac's
+   are running Apple silicon instead of Intel processors.) Therefore, to eliminate errors that originally showed themself
+   in PHP, we are adding the following architectures, linux/amd64 and linux/arm64, to the Docker Hub repository.
+
+   To build the images and push images for both architectures, run the following command:
+   ```
+   docker buildx build . --progress plain --push --platform linux/amd64,linux/arm64/v8 -t ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.22
+   ```
+
+   Below are the outdated instructions to tag and push the image, for posterity sake:
    ```
    docker tag IMAGE_ID registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.21
-   ```
-   
-3. Docker push to repository (assuming you have access).
-   ```
    docker push registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.21
    ```
 
