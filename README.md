@@ -68,7 +68,32 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
 ### Tag and Push
 
-u1. Git add, commit, and tag. For example, we are releasing version 1.0.22.
+0. #### Proper GitHub Configuration
+
+   Make sure your local Git repo is configured for SSH access. In order to push to GitHub, your local git repo must be configured for SSH access, not HTTPS.
+   Run the following command to determine how the your local repo is communicating with GitLab:
+   ```
+   git remote -v
+   ```
+   HTTPS access will give the following response:
+   ```
+   origin  https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql.git (fetch)
+   origin  https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql.git (push)
+   ```
+   To configure SSH access to the repository run the following command:
+   ```
+   git remote set-url origin git@github.com:ccctechcenter/alpine-nginx-phpfpm-pgsql.git
+   ```
+   Verify the command was successful by running ```git remote -v``` and should the results for the SSH access.
+   ```
+   origin  git@github.com:ccctechcenter/alpine-nginx-phpfpm-pgsql.git (fetch)
+   origin  git@github.com:ccctechcenter/alpine-nginx-phpfpm-pgsql.git (push)
+   ```
+
+   Now you will be able to push your branch up to GitHub.
+ 
+
+1. Git add, commit, and tag. For example, we are releasing version 1.0.22.
    ```
    git status
    git add -u
@@ -78,6 +103,9 @@ u1. Git add, commit, and tag. For example, we are releasing version 1.0.22.
    ```
    
 2. Docker tag image with IMAGE_ID found earlier.
+3. 
+4. ## NEED TO UPDATE TO PUSH TO DOCKER HUB
+5. 
    ```
    docker tag IMAGE_ID registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.21
    ```
@@ -96,6 +124,60 @@ u1. Git add, commit, and tag. For example, we are releasing version 1.0.22.
 * NPM 10.9.1
 * PHP 8.3
 * Supervisord
+
+## Configuration Documentation
+
+### Alpine
+Although Alpine does not have any customization, it is worth noting that at the time of this build (2005-05-09), the 
+base image of this build, Alpine 3.21, does not have any reported vulnerabilities in Docker Scout.
+
+### nginx
+The following settings have been removed from our default NGINX config:
+```
+pcre_jit on;
+server_tokens off;
+client_max_body_size 1m;
+tcp_nopush on;
+ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
+ssl_prefer_server_ciphers on;
+ssl_session_cache shared:SSL:2m;
+ssl_session_timeout 1h;
+ssl_session_tickets off;
+gzip_vary on;
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    '' close;
+}
+```
+The following settings have been changed from their default values:
+```
+worker_processes 5;
+error_log /dev/stderr debug;
+access_log  /dev/stdout  main;
+keepalive_timeout 300;
+add_header Strict-Transport-Security "max-age=31536000; preload; includeSubDomains";
+include /etc/nginx/sites-enabled/*;
+daemon off;
+```
+
+### PHP 8.3
+(will be updated in the future)
+
+### Supervisord
+The configuration for Supervisord accomplishes the following:
+1. base configuration for the daemon
+2. enable RPC interface for to allow daemons to be started, stopped, and restarted via the command line
+3. enable the daemonization of the following programs:
+   1. nginx: the web server
+   2. php-fpm83: the php handler for the nginx
+   3. crond: the scheduler that runs the artisan scheduled jobs
+
+
+### Other
+The following add-ins require no customization:
+1. Curl
+2. Node
+3. NPM
 
 ## Find Us
 
