@@ -23,10 +23,10 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
 #### Useful File Locations
 
-* `/etc/nginx` - NGINX directory
-* `/run/nginx` - NGINX directory
-* `/run/php82` - PHP 8.2 directory
-* `/run/supervisor` - Supervisord directory
+* `/etc/nginx` - NGINX, configuration directory
+* `/run/nginx` - NGINX directory, used for the pid and socket
+* `/run/php83` - PHP 8.3 directory, used for the pid and socket
+* `/run/supervisor` - Supervisord directory, used for the pid and socket
 * `/var/log/supervisor` - Supervisord logs
 
 ## Build
@@ -68,33 +68,33 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
 ### Tag and Push
 
-1. Git add, commit, and tag. For example, we are releasing version 1.0.19.
+1. Git add, commit, and tag. For example, we are releasing version 1.0.21.
    ```
    git status
    git add -u
-   git commit -m "SCM-3300 Add Instructions to Build"
-   git tag -a 1.0.19 -m "release 1.0.19"
-   git push origin release/1.0.19 && git push origin 1.0.19
+   git commit -m "SCM-3324 & SCM-3236 Upgrade to Alpine 3.21 and PHP 8.3"
+   git tag -a 1.0.21 -m "release 1.0.21"
+   git push origin release/1.0.21 && git push origin 1.0.21
    ```
    
 2. Docker tag image with IMAGE_ID found earlier.
    ```
-   docker tag IMAGE_ID registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.19
+   docker tag IMAGE_ID registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.21
    ```
    
 3. Docker push to repository (assuming you have access).
    ```
-   docker push registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.19
+   docker push registry.ccctechcenter.org/ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.21
    ```
 
 ## Built With
 
-* Alpine 3.19
-* CUrl
-* NGINX
-* Node.js
-* NPM 10.5.0
-* PHP 8.2
+* Alpine 3.21
+* Curl 8.12.1
+* nginx 1.26.3 
+* Node.js 22.13.1
+* NPM 10.9.1
+* PHP 8.3
 * Supervisord
 
 ## Find Us
@@ -109,7 +109,7 @@ For the versions available, see the
 ## Authors
 
 * **UT Fong** - *Maintenance: Created this doc, not the repo* - [ufongccctc](https://github.com/ufongccctc)
-
+* **Ken Van Mersbergen** *Maintenance: Upgraded this image to Alpine 3.21 and PHP 8.3
 See also the list of [contributors](https://github.com/your/repository/contributors) who
 participated in this project.
 
