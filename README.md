@@ -194,7 +194,7 @@ For the versions available, see the
 ## Authors
 
 * **UT Fong** - *Maintenance: Created this doc, not the repo* - [ufongccctc](https://github.com/ufongccctc)
-* **Ken Van Mersbergen** *Maintenance: Upgraded this image to Alpine 3.21 and PHP 8.3
+* **Ken Van Mersbergen** *Maintenance: Upgraded this image to Alpine 3.21 and PHP 8.3* - [kvanmersbergen](https://github.com/kvanmersbergen)
 
 See also the list of [contributors](https://github.com/ccctechcenter/alpine-nginx-phpfpm-pgsql/contributors) who
 participated in this project.
