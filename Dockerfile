@@ -65,9 +65,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # Add php-fpm.d/www.conf
 RUN rm -f /etc/php84/php-fpm.conf
-RUN rm -f /etc/php84/php-fpm.d/www.conf
 COPY php-fpm.conf /etc/php84/php-fpm.conf
-COPY www.conf /etc/php84/php-fpm.d/www.conf
 
 # Link the php84 to the php command line statement
 RUN rm -f /usr/bin/php
