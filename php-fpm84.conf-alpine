@@ -14,17 +14,14 @@
 ; Pid file
 ; Note: the default prefix is /var
 ; Default Value: none
-pid = /run/php84/php-fpm.pid
+;pid = run/php-fpm84.pid
 
 ; Error log file
 ; If it's set to "syslog", log is sent to syslogd instead of being written
 ; into a local file.
 ; Note: the default prefix is /var
 ; Default Value: log/php84/error.log
-;
-; Dev Notes: This has to output to stdout/err (/proc/self/fd/2) for supervisord
-; to pick up PHP errors.
-error_log = /proc/self/fd/2
+;error_log = log/php84/error.log
 
 ; syslog_facility is used to specify what type of program is logging the
 ; message. This lets syslogd specify that messages from different facilities
