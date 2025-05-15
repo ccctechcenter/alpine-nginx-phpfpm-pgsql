@@ -31,10 +31,10 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 #### Useful File Locations
 
 * `/etc/nginx` - NGINX configuration directory
-* `/etc/php84` - PHP configuration directory
-* `/etc/php84/fpm-php.d` - PHP-FPM web service pool configuration
+* `/etc/php83` - PHP configuration directory
+* `/etc/php83/fpm-php.d` - PHP-FPM web service pool configuration
 * `/run/nginx` - NGINX directory, used for the pid and socket
-* `/run/php84` - PHP 8.4 directory, used for the pid and socket
+* `/run/php83` - PHP 8.4 directory, used for the pid and socket
 * `/run/supervisor` - Supervisord directory, used for the pid and socket
 * `/var/log/supervisor` - Supervisord logs
 
@@ -182,7 +182,7 @@ The configuration for Supervisord accomplishes the following:
 2. enable RPC interface for to allow daemons to be started, stopped, and restarted via the command line
 3. enable the daemonization of the following programs:
    1. nginx: the web server
-   2. php-fpm84: the php handler for the nginx
+   2. php-fpm83: the php handler for the nginx
    3. crond: the scheduler that runs the artisan scheduled jobs
 
 
