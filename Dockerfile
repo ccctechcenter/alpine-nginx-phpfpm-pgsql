@@ -63,9 +63,10 @@ RUN mkdir -p /var/log/supervisor
 RUN rm -f /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Add php-fpm.d/www.conf
-RUN rm -f /etc/php83/php-fpm.d/www.conf
-COPY php-fpm.conf /etc/php83/php-fpm.d/www.conf
+# Add php-fpm configs
+RUN rm -f /etc/php83/*.conf
+RUN rm -f /etc/php83/php-fpm.d/*.conf
+COPY php-fpm.conf /etc/php83/php-fpm.conf
 
 # create a link for php to the php83 executable
 RUN rm -f /usr/bin/php
