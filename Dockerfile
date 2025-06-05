@@ -2,7 +2,7 @@
 # 20240515: No need to install pip and supervisor-stdout. Supervisor-stdout is a python app that has not been updated
 # for 3 years. Supervisord can output to stdout with stdout_logfile in supervisord.conf.
 # 20250505: Update to latest version of Alpine, 3.21 and PHP 8.3
-FROM alpine:3.21
+FROM alpine:3.22
 
 # Change the maintainer to your info if you update this version of the image.
 LABEL maintainer="Ken Van Mersbergen <kvanmersbergen@ccctechcenter.org>"

@@ -4,9 +4,9 @@ Alpine image with NGINX, PHP, and PostgreSQL.
 
 ## Getting Started
 
-As a foundation, the base image for our single image to rule them all is based on the official Alpine Linux 3.21 image, published February 14, 2025, on Docker Hub.
+As a foundation, the base image for our single image to rule them all is based on the official Alpine Linux 3.22 image, published May 30, 2025, on Docker Hub.
 
-Through `Dockerfile` nginx, PHP 8.4, NodeJS, NPM and SupervisorD are installed. 
+Through `Dockerfile` nginx, PHP 8.3, NodeJS, NPM and SupervisorD are installed. 
 
 In order to compare the standard configuration for PHP 8.4, the original config files are included in this image with the extension of `-alpine`. Please note they
 are NOT used in the build process and exist only for comparison purposes.
@@ -119,7 +119,12 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
    To build the images and push images for both architectures, run the following command:
    ```
-   docker buildx build . --progress plain --push --platform linux/amd64,linux/arm64/v8 -t ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.22
+   docker buildx build . --progress plain --push --platform linux/amd64,linux/arm64/v8 -t ccctechcenter/alpine-nginx-phpfpm-pgsql:1.0.25
+   ```
+   
+   If a developer finds it necessary to build a local image and not push it to the registry, use the following command:
+   ```
+   docker buildx build . --progress plain --platform linux/amd64,linux/arm64/v8 -t alpine-nginx-phpfpm-pgsql:1.0.23
    ```
 
    Below are the outdated instructions to tag and push the image, for posterity sake:
@@ -130,12 +135,12 @@ This image can be used in `docker-compose.yml`, or be pulled in and built with `
 
 ## Built With
 
-* Alpine 3.21
+* Alpine 3.22
 * Curl 8.12.1
 * nginx 1.26.3 
 * Node.js 22.13.1
 * NPM 10.9.1
-* PHP 8.4.5
+* PHP 8.3
 * Supervisord 4.2.5
 
 ## Configuration Documentation
